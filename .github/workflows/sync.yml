@@ -1,0 +1,17 @@
+name: Sync Repo
+
+on:
+  push:
+    branches: [ "sugon/aomp-dev" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        fetch-depth: '0'
+    - name: sync bitbucket
+      run: git push ${{ secrets.BITBUCKET_URL }} $GITHUB_REF_NAME
