@@ -1,0 +1,21 @@
+name: Sugon Pull Upstream
+
+on:
+  schedule:
+  - cron:  "*/15 * * * *"
+  workflow_dispatch:
+
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        persist-credentials: false
+    - name: repo-sync
+      uses: repo-sync/github-sync@v2
+      with:
+        source_repo: "https://github.com/ROCm-Developer-Tools/aomp"
+        source_branch: "aomp-dev"
+        destination_branch: "aomp-dev"
+        github_token: ${{ secrets.PAT }}
