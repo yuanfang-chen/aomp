@@ -1,6 +1,7 @@
-name: Sync Repo
+name: Sugon Sync Repo
 
 on:
+  workflow_dispatch:
   push:
     branches: [ "sugon/aomp-dev" ]
 
@@ -14,4 +15,4 @@ jobs:
       with:
         fetch-depth: '0'
     - name: sync bitbucket
-      run: git push ${{ secrets.BITBUCKET_URL }} $GITHUB_REF_NAME
+      run: git push --all ${{ secrets.BITBUCKET_URL }}
