@@ -52,7 +52,7 @@ EOF
 }
 
 SUPPLEMENTAL_COMPONENTS=${SUPPLEMENTAL_COMPONENTS:-openmpi silo hdf5 fftw ninja}
-PREREQUISITE_COMPONENTS=${PREREQUISITE_COMPONENTS:-cmake rocmsmilib hwloc aqlprofile}
+PREREQUISITE_COMPONENTS=${PREREQUISITE_COMPONENTS:-rocmsmilib hwloc aqlprofile} # SUGON_DTK
 
 # --- Start standard header to set AOMP environment variables ----
 realpath=`realpath $0`
@@ -158,8 +158,10 @@ function buildninja(){
     runcmd "rm -rf $_installdir"
   fi
   runcmd "mkdir -p $_installdir/bin"
-  runcmd "$AOMP_SUPP/cmake/bin/cmake -Bbuild-cmake"
-  runcmd "$AOMP_SUPP/cmake/bin/cmake --build build-cmake"
+  # SUGON_DTK: begin
+  runcmd "$AOMP_CMAKE -Bbuild-cmake"
+  runcmd "$AOMP_CMAKE --build build-cmake"
+  # SUGON_DTK: end
   runcmd "cp -p build-cmake/ninja $_installdir/bin/."
   if [ -L $_linkfrom ] ; then
     runcmd "rm $_linkfrom"
@@ -379,7 +381,7 @@ function buildrocmsmilib(){
   runcmd "cd rocmsmilib-$_version"
   runcmd "mkdir -p build"
   runcmd "cd build"
-  runcmd "$AOMP_SUPP/cmake/bin/cmake -DCMAKE_INSTALL_PREFIX=$_installdir .."
+  runcmd "$AOMP_CMAKE -DCMAKE_INSTALL_PREFIX=$_installdir .." # SUGON_DTK
   if [ -d $_installdir ] ; then 
     runcmd "rm -rf $_installdir"
   fi
