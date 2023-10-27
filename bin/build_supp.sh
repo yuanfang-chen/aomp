@@ -151,7 +151,7 @@ function buildninja(){
   fi
   runcmd "mkdir -p $_builddir"
   runcmd "cd $_builddir"
-  runcmd "wget https://github.com/ninja-build/ninja/archive/refs/tags/v${_version}.tar.gz"
+  runcmd "wget https://521github.com/ninja-build/ninja/archive/refs/tags/v${_version}.tar.gz" # SUGON_DTK
   runcmd "tar -xzf v${_version}.tar.gz"
   runcmd "cd ninja-$_version"
   if [ -d $_installdir ] ; then
@@ -343,7 +343,7 @@ function buildcmake(){
   fi
   runcmd "mkdir -p $_builddir"
   runcmd "cd $_builddir"
-  runcmd "wget https://github.com/Kitware/CMake/releases/download/v$_version/cmake-$_version.tar.gz"
+  runcmd "wget https://521github.com/Kitware/CMake/releases/download/v$_version/cmake-$_version.tar.gz" # SUGON_DTK
   runcmd "tar -xzf cmake-$_version.tar.gz"
   runcmd "cd cmake-$_version"
   if [ -d $_installdir ] ; then 
@@ -377,7 +377,7 @@ function buildrocmsmilib(){
   fi
   runcmd "mkdir -p $_builddir"
   runcmd "cd $_builddir"
-  runcmd "git clone -b rocm-$_version https://github.com/radeonopencompute/rocm_smi_lib rocmsmilib-$_version"
+  runcmd "git clone -b rocm-$_version https://521github.com/radeonopencompute/rocm_smi_lib rocmsmilib-$_version" # SUGON_DTK
   runcmd "cd rocmsmilib-$_version"
   runcmd "mkdir -p build"
   runcmd "cd build"
@@ -418,7 +418,7 @@ function buildhwloc(){
   fi
   runcmd "mkdir -p $_builddir"
   runcmd "cd $_builddir"
-  runcmd "git clone https://github.com/open-mpi/hwloc hwloc-$_version"
+  runcmd "git clone https://521github.com/open-mpi/hwloc hwloc-$_version" # SUGON_DTK
   runcmd "cd hwloc-$_version"
   runcmd "git checkout v$_version"
   runcmd "./autogen.sh"
