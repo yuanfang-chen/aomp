@@ -1,5 +1,5 @@
-name: Sugon Pull Upstream
-    
+name: Sugon Pull Upstream Push Bitbucket
+
 on:
   schedule:
   - cron:  "*/15 * * * *"
@@ -12,10 +12,15 @@ jobs:
     - uses: actions/checkout@v3
       with:
         persist-credentials: false
+        fetch-depth: '0'
     - name: repo-sync
       uses: repo-sync/github-sync@v2
       with:
-        source_repo: "https://github.com/ROCm-Developer-Tools/aomp"
-        source_branch: "aomp-dev"
-        destination_branch: "aomp-dev"
+        source_repo: "${{ vars.UPSTREAM_URL }}"
+        source_branch: "${{ vars.UPSTREAM_BRANCH }}"
+        destination_branch: "${{ vars.UPSTREAM_BRANCH }}"
         github_token: ${{ secrets.PAT }}
+    - name: checkout branch
+      run: git checkout ${{ vars.UPSTREAM_BRANCH }}
+    - name: push branch to Bitbucket
+      run: git push ${{ secrets.BITBUCKET_URL }} ${{ vars.UPSTREAM_BRANCH }}:${{ vars.UPSTREAM_BRANCH }}
